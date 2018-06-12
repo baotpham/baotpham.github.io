@@ -1,48 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+    <div class="page">
+<head>
+  <meta charset="utf-8">
+  <title>CVCF Youth Retreat Registration Form</title>
+  <base href="/">
+  <style>
+    /* body{
+    background-color: #ffdac4;
+    } */
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Haluwasa Christian Family Camp</title>
+</head>
+<body>
 
-        <!--remote-->
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-        <script src="https://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-
-        <!--local-->
-        <script src="./js/app.js"></script>
-        <script src="./js/app.routes.js"></script>
-        <script src="./js/routes.js"></script>
-
-        <script src="./js/controllers/registrationForm.js"></script>
-        <script src="./js/controllers/aboutUs.js"></script>
-        <script src="./js/controllers/contactUs.js"></script>
-        <script src="./js/controllers/homePage.js"></script>
-        <script src="./js/controllers/thankYou.js"></script>
-
-        <!--style-->
-        <link rel="stylesheet" type="text/css" href="./css/style.css">
-        <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Open+Sans+Condensed:300,700" rel="stylesheet">    </head>
-
-    <body ng-app="haluwasaCamp">
-
-        <!--nav bar-->
-        <header class="topnav">
-            <p class="title">Haluwasa Christian Family Camp</p>
-            <a ui-sref="contactUs">CONTACT</a>
-            <a ui-sref="registration">REGISTRATION</a>
-            <a ui-sref="aboutUs">ABOUT</a>
-            <a ui-sref="homePage">HOME</a>
-        </header>
-
-        <!-- this is the view -->
-        <ui-view></ui-view>
-
-        <footer class="botnav">
-            <a style="font-family: 'San Francisco Display Ultralight', serif">May 26 - 29, 2017</a>
-        </footer>
-    </body>
+  <div class="page">
+    <app-root></app-root>
+    </div>
+  
+  <script src="https://js.stripe.com/v3/"></script>
+  <script type="text/javascript">
+    var stripe = Stripe('pk_live_kyYbvorCAs5dnLmIXPlbX3Tm'); // publishable live key
+    // var stripe = Stripe('pk_test_9KNj8mmG9Ni8uWR3yiiW8Uk1'); // publishable test key
+    var elements = stripe.elements();
+  </script>
+<script type="text/javascript" src="runtime.js"></script><script type="text/javascript" src="polyfills.js"></script><script type="text/javascript" src="styles.js"></script><script type="text/javascript" src="scripts.js"></script><script type="text/javascript" src="vendor.js"></script><script type="text/javascript" src="main.js"></script></body>
 </html>
