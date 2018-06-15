@@ -34,7 +34,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Attendee", function() { return Attendee; });
 var Attendee = /** @class */ (function () {
-    function Attendee(first_name, last_name, t_shirt, gender, age, medical, address, address_2, city, state, zip_code, email, emergency_contact_first_name, emergency_contact_last_name, emergency_contact_phone_number, emergency_contact_relationship, your_church, your_church_point_of_contact_name, your_church_point_of_contact_number) {
+    function Attendee(first_name, last_name, t_shirt, gender, age, medical, address, address_2, city, state, zip_code, email, emergency_contact_first_name, emergency_contact_last_name, emergency_contact_phone_number, emergency_contact_relationship, your_church, your_church_point_of_contact_name, your_church_point_of_contact_number, days_attending, cost) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.t_shirt = t_shirt;
@@ -54,6 +54,8 @@ var Attendee = /** @class */ (function () {
         this.your_church = your_church;
         this.your_church_point_of_contact_name = your_church_point_of_contact_name;
         this.your_church_point_of_contact_number = your_church_point_of_contact_number;
+        this.days_attending = days_attending;
+        this.cost = cost;
     }
     return Attendee;
 }());
@@ -209,7 +211,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"title-container\">\n  <div class=\"title\">\n    Registration Info\n  </div>\n</div>\n\n\n<div class=\"total-info\">\n  Total Registers:\n  <span *ngIf=\"people.length != undefined\">{{people.length}}</span>\n  <span *ngIf=\"people.length == undefined\">0</span>\n</div>\n\n<!-- Attendee Forms -->\n<form [formGroup]=\"attendeeForm\" (ngSubmit)=\"onSubmit()\" #checkout=\"ngForm\" class=\"checkout\">\n\n  <!-- <button type=\"button\" (click)=\"partialUpdate()\">Partial Update</button>\n  <button type=\"button\" (click)=\"fullUpdate()\">Full Update</button>\n  <button type=\"button\" (click)=\"check()\">Check</button>\n  <button type=\"button\" (click)=\"lazyOne()\">Lazy One</button>\n  <button type=\"button\" (click)=\"lazyTwo()\">Lazy Two</button> -->\n\n  <div class=\"form-control\">\n    <div class=\"FormRow\">\n      <div class=\"MediumFormFieldContainer\">\n        <label class=\"control-label\">First Name</label>\n        <input class=\"form-control\" type=\"text\" formControlName=\"first_name\" placeholder=\"Enter Your First Name\" (change)=\"addAttendee()\"\n          required>\n        <!-- <div [hidden]=\"first_name.valid || first_name.pristine\" class=\"alert alert-danger\">First Name is required</div> -->\n      </div>\n      <div class=\"MediumFormFieldContainer\">\n        <label class=\"control-label\">Last Name</label>\n        <input class=\"form-control\" type=\"text\" formControlName=\"last_name\" placeholder=\"Enter Your Last Name\" (change)=\"addAttendee()\"\n          required>\n        <!-- <div [hidden]=\"last_name.valid || last_name.pristine\" class=\"alert alert-danger\">Last Name is required</div> -->\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"SmallFormFieldContainer\">\n        <label class=\"control-label\">T-Shirt Size</label>\n        <select class=\"form-control\" formControlName=\"t_shirt\" (change)=\"addAttendee()\" required>\n          <option *ngFor=\"let size of sizes\" [value]=\"size\">{{size}}</option>\n        </select>\n        <!-- <div [hidden]=\"t_shirt.valid || t_shirt.pristine\" class=\"alert alert-danger\">T-shirt size is required</div> -->\n      </div>\n      <div class=\"SmallFormFieldContainer\">\n        <label class=\"control-label\">Gender</label>\n        <select class=\"form-control\" formControlName=\"gender\" (change)=\"addAttendee()\" required>\n          <option *ngFor=\"let gender of genders\" [value]=\"gender\">{{gender}}</option>\n        </select>\n        <!-- <div [hidden]=\"gender.valid || gender.pristine\" class=\"alert alert-danger\">Gender is required</div> -->\n      </div>\n      <div class=\"SmallFormFieldContainer\">\n        <label class=\"control-label\">Age</label>\n        <input class=\"form-control\" type=\"number\" formControlName=\"age\" placeholder=\"12\" (change)=\"addAttendee()\" required>\n        <!-- <div [hidden]=\"age.valid || age.pristine\" class=\"alert alert-danger\">Age is required</div> -->\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\">Medical Issues/Allergies</label>\n        <textarea class=\"form-control\" type=\"text\" formControlName=\"medical\" placeholder=\"N/A\" rows=\"5\" (change)=\"addAttendee()\"\n          required></textarea>\n        <!-- <div [hidden]=\"medical.valid || medical.pristine\" class=\"alert alert-danger\">Medical Information is required. Put N/A if you have none.</div> -->\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\">Address</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your Address\" formControlName=\"address\" (change)=\"addAttendee()\"\n          required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\">Address 2</label>\n        <input class=\"form-control non-required\" type=\"text\" placeholder=\"N/A\" name=\"address_2\" formControlName=\"address_2\" (change)=\"addAttendee()\">\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"city\">City</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your City\" name=\"city\" formControlName=\"city\" (change)=\"addAttendee()\"\n          required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"MediumFormFieldContainer\">\n        <label class=\"control-label\" for=\"state\">State</label>\n        <!-- <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your State\" name=\"state\" formControlName=\"state\" required> -->\n        <select class=\"form-control\" formControlName=\"state\" (change)=\"addAttendee()\" required>\n          <option *ngFor=\"let state of states\" [value]=\"state\">{{state}}</option>\n        </select>\n      </div>\n      <div class=\"MediumFormFieldContainer\">\n        <label class=\"control-label\" for=\"zip\">Zip Code</label>\n        <input class=\"form-control\" type=\"number\" placeholder=\" Enter Your Zip Code\" name=\"zip_code\" formControlName=\"zip_code\" (change)=\"addAttendee()\"\n          required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"email\">Email</label>\n        <input class=\"form-control non-required\" type=\"email\" placeholder=\"Enter Your Email\" name=\"email\" formControlName=\"email\"\n          (change)=\"addAttendee()\">\n      </div>\n    </div>\n\n\n    <h3 style=\"margin-top:20px;\">Emergency Contact</h3>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"emergency_contact_first_name\">First Name</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter First Name\" name=\"emergency_contact_first_name\" formControlName=\"emergency_contact_first_name\"\n          (change)=\"addAttendee()\" required>\n      </div>\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"emergency_contact_last_name\">Last Name</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Last Name\" name=\"emergency_contact_last_name\" formControlName=\"emergency_contact_last_name\"\n          (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"emergency_contact_phone_number\">Phone Number</label>\n        <input class=\"form-control\" type=\"number\" placeholder=\"Enter Phone Number\" name=\"emergency_contact_phone_number\" formControlName=\"emergency_contact_phone_number\"\n          (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"emergency_contact_relationship\">Relationship</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Relationship\" name=\"emergency_contact_relationship\" formControlName=\"emergency_contact_relationship\"\n          (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n\n    <h3 style=\"margin-top:20px;\">Church Contact</h3>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_churches\">Your Church</label>\n        <!-- <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your State\" name=\"state\" formControlName=\"state\" required> -->\n        <select class=\"form-control\" formControlName=\"your_churches\" (change)=\"addAttendee()\" required>\n          <option *ngFor=\"let your_churches of church_list\" [value]=\"your_churches\">{{your_churches}}</option>\n        </select>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church\">Your Church: If you chose \"Other\"</label>\n        <input class=\"form-control non-required\" type=\"text\" placeholder=\"Enter Your Church Name\" name=\"your_church\" formControlName=\"your_church\"\n          (change)=\"addAttendee()\">\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church_point_of_contact_name\">Your Church Point of Contact Name</label>\n        <input class=\"form-control non-required\" type=\"text\" placeholder=\"Enter Your Church Point of Contact Name\" name=\"your_church_point_of_contact_name\"\n          formControlName=\"your_church_point_of_contact_name\" (change)=\"addAttendee()\">\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church_point_of_contact_number\">Your Church Point of Contact Number</label>\n        <input class=\"form-control non-required\" type=\"number\" placeholder=\"Enter Your Church Point of Contact Phone Number\" name=\"your_church_point_of_contact_number\"\n          formControlName=\"your_church_point_of_contact_number\" (change)=\"addAttendee()\">\n      </div>\n    </div>\n\n    <hr>\n    <div class=\"FormFieldContainer\">\n      <ul class=\"pagination\">\n        <!-- <li class=\"active\"> -->\n        <!-- <a href=\"#\">PREV</a> -->\n        <!-- </li> -->\n        <li class=\"user-entry\" *ngFor=\"let person of people; let i = index\" [ngClass]=\"{'active': currentAttendee === person}\" (click)=\"loadAttendee(person, i);\">\n          <button type=\"button\" *ngIf=\"people.length > 1\" class=\"DeleteButton\" (click)=\"deleteAttendee(i)\">-</button>\n          <div class=\"pagination-button\">{{i+1}}</div>\n        </li>\n        <li>\n          <a id=\"add-entry-box\" (click)=\"createNewAttendee()\">\n            <i class=\"fa fa-plus fa-2x add-entry\"></i>\n          </a>\n        </li>\n        <!-- <li class=\"active\"> -->\n        <!-- <a href=\"#\">NEXT</a> -->\n        <!-- </li> -->\n      </ul>\n    </div>\n  </div>\n\n\n  <!-- <div style=\"height: 70px;\"></div> -->\n\n  <!-- <div class=\"title-container\">\n    <div class=\"title\"> -->\n  <!-- Church Contact -->\n  <!-- Church Contact\n    </div>\n  </div> -->\n\n  <!-- <div style=\"height: 40px;\"></div> -->\n\n  <!-- <div class=\"form-control\">\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church\">Your Church</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your Church Name\" name=\"your_church\" formControlName=\"your_church\" (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church_point_of_contact_name\">Your Church Point of Contact Name</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your Church Point of Contact Name\" name=\"your_church_point_of_contact_name\" formControlName=\"your_church_point_of_contact_name\" (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church_point_of_contact_number\">Your Church Point of Contact Number</label>\n        <input class=\"form-control\" type=\"number\" placeholder=\"Enter Your Church Point of Contact Phone Number\" name=\"your_church_point_of_contact_number\" formControlName=\"your_church_point_of_contact_number\" (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n  </div> -->\n\n\n\n  <!-- <div class=\"title-container\">\n    <div class=\"title\">\n      Payment\n    </div>\n  </div> -->\n\n  <!-- <div class=\"page-border\">\n    <div class=\"form-control\">\n\n      <label for=\"card-info\" id=\"card-title\">Card Information</label>\n      <div class=\"CardRow\">\n        <div id=\"card-info\" #cardInfo></div>\n\n        <div id=\"card-errors\" role=\"alert\" *ngIf=\"error\">{{ error }}</div>\n      </div>\n    </div>\n  </div> -->\n</form>\n\n<!-- spacing -->\n<div style=\"height: 30px;\"></div>\n\n<!-- next button -->\n<div class=\"nav-buttons\">\n  <button class=\"nav-button next-button\" routerLink=\"/review\">Next</button>\n</div>"
+module.exports = "<div class=\"title-container\">\n  <div class=\"title\">\n    Registration Info\n  </div>\n</div>\n\n\n<div class=\"total-info\">\n  Total Registers:\n  <span *ngIf=\"people.length != undefined\">{{people.length}}</span>\n  <span *ngIf=\"people.length == undefined\">0</span>\n</div>\n\n<!-- Attendee Forms -->\n<form [formGroup]=\"attendeeForm\" (ngSubmit)=\"onSubmit()\" #checkout=\"ngForm\" class=\"checkout\">\n\n  <!-- <button type=\"button\" (click)=\"partialUpdate()\">Partial Update</button>\n  <button type=\"button\" (click)=\"fullUpdate()\">Full Update</button>\n  <button type=\"button\" (click)=\"check()\">Check</button>\n  <button type=\"button\" (click)=\"lazyOne()\">Lazy One</button>\n  <button type=\"button\" (click)=\"lazyTwo()\">Lazy Two</button> -->\n  <div class=\"form-control\">\n    <h3>Personal Info</h3>\n\n    <div class=\"FormRow\">\n      <div class=\"MediumFormFieldContainer\">\n        <label class=\"control-label\">First Name</label>\n        <input class=\"form-control\" type=\"text\" formControlName=\"first_name\" placeholder=\"Enter Your First Name\" (change)=\"addAttendee()\"\n          required>\n        <!-- <div [hidden]=\"first_name.valid || first_name.pristine\" class=\"alert alert-danger\">First Name is required</div> -->\n      </div>\n      <div class=\"MediumFormFieldContainer\">\n        <label class=\"control-label\">Last Name</label>\n        <input class=\"form-control\" type=\"text\" formControlName=\"last_name\" placeholder=\"Enter Your Last Name\" (change)=\"addAttendee()\"\n          required>\n        <!-- <div [hidden]=\"last_name.valid || last_name.pristine\" class=\"alert alert-danger\">Last Name is required</div> -->\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"SmallFormFieldContainer\">\n        <label class=\"control-label\">T-Shirt Size</label>\n        <select class=\"form-control\" formControlName=\"t_shirt\" (change)=\"addAttendee()\" required>\n          <option *ngFor=\"let size of sizes\" [value]=\"size\">{{size}}</option>\n        </select>\n        <!-- <div [hidden]=\"t_shirt.valid || t_shirt.pristine\" class=\"alert alert-danger\">T-shirt size is required</div> -->\n      </div>\n      <div class=\"SmallFormFieldContainer\">\n        <label class=\"control-label\">Gender</label>\n        <select class=\"form-control\" formControlName=\"gender\" (change)=\"addAttendee()\" required>\n          <option *ngFor=\"let gender of genders\" [value]=\"gender\">{{gender}}</option>\n        </select>\n        <!-- <div [hidden]=\"gender.valid || gender.pristine\" class=\"alert alert-danger\">Gender is required</div> -->\n      </div>\n      <div class=\"SmallFormFieldContainer\">\n        <label class=\"control-label\">Age</label>\n        <input class=\"form-control\" type=\"number\" formControlName=\"age\" placeholder=\"12\" (change)=\"addAttendee()\" required>\n        <!-- <div [hidden]=\"age.valid || age.pristine\" class=\"alert alert-danger\">Age is required</div> -->\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\">Medical Issues/Allergies</label>\n        <textarea class=\"form-control\" type=\"text\" formControlName=\"medical\" placeholder=\"N/A\" rows=\"5\" (change)=\"addAttendee()\"\n          required></textarea>\n        <!-- <div [hidden]=\"medical.valid || medical.pristine\" class=\"alert alert-danger\">Medical Information is required. Put N/A if you have none.</div> -->\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\">Address</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your Address\" formControlName=\"address\" (change)=\"addAttendee()\"\n          required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\">Address 2</label>\n        <input class=\"form-control non-required\" type=\"text\" placeholder=\"N/A\" name=\"address_2\" formControlName=\"address_2\" (change)=\"addAttendee()\">\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"city\">City</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your City\" name=\"city\" formControlName=\"city\" (change)=\"addAttendee()\"\n          required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"MediumFormFieldContainer\">\n        <label class=\"control-label\" for=\"state\">State</label>\n        <!-- <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your State\" name=\"state\" formControlName=\"state\" required> -->\n        <select class=\"form-control\" formControlName=\"state\" (change)=\"addAttendee()\" required>\n          <option *ngFor=\"let state of states\" [value]=\"state\">{{state}}</option>\n        </select>\n      </div>\n      <div class=\"MediumFormFieldContainer\">\n        <label class=\"control-label\" for=\"zip\">Zip Code</label>\n        <input class=\"form-control\" type=\"number\" placeholder=\" Enter Your Zip Code\" name=\"zip_code\" formControlName=\"zip_code\" (change)=\"addAttendee()\"\n          required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"email\">Email</label>\n        <input class=\"form-control non-required\" type=\"email\" placeholder=\"Enter Your Email If You Have One\" name=\"email\" formControlName=\"email\"\n          (change)=\"addAttendee()\">\n      </div>\n    </div>\n\n    <h3 style=\"margin-top:20px;\">Emergency Contact</h3>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"emergency_contact_first_name\">First Name</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter First Name\" name=\"emergency_contact_first_name\" formControlName=\"emergency_contact_first_name\"\n          (change)=\"addAttendee()\" required>\n      </div>\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"emergency_contact_last_name\">Last Name</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Last Name\" name=\"emergency_contact_last_name\" formControlName=\"emergency_contact_last_name\"\n          (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"emergency_contact_phone_number\">Phone Number</label>\n        <input class=\"form-control\" type=\"number\" placeholder=\"Enter Phone Number\" name=\"emergency_contact_phone_number\" formControlName=\"emergency_contact_phone_number\"\n          (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"emergency_contact_relationship\">Relationship</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Relationship\" name=\"emergency_contact_relationship\" formControlName=\"emergency_contact_relationship\"\n          (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n\n    <h3 style=\"margin-top:20px;\">Church Contact</h3>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_churches\">Your Church</label>\n        <!-- <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your State\" name=\"state\" formControlName=\"state\" required> -->\n        <select class=\"form-control\" formControlName=\"your_churches\" (change)=\"addAttendee()\" required>\n          <option *ngFor=\"let your_churches of church_list\" [value]=\"your_churches\">{{your_churches}}</option>\n        </select>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church\">Your Church: If you chose \"Other\"</label>\n        <input class=\"form-control non-required\" type=\"text\" placeholder=\"Enter Your Church Name\" name=\"your_church\" formControlName=\"your_church\"\n          (change)=\"addAttendee()\">\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church_point_of_contact_name\">Your Church Point of Contact Name</label>\n        <input class=\"form-control non-required\" type=\"text\" placeholder=\"Enter Your Church Point of Contact Name\" name=\"your_church_point_of_contact_name\"\n          formControlName=\"your_church_point_of_contact_name\" (change)=\"addAttendee()\">\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church_point_of_contact_number\">Your Church Point of Contact Number</label>\n        <input class=\"form-control non-required\" type=\"number\" placeholder=\"Enter Your Church Point of Contact Phone Number\" name=\"your_church_point_of_contact_number\"\n          formControlName=\"your_church_point_of_contact_number\" (change)=\"addAttendee()\">\n      </div>\n    </div>\n\n    <h3 style=\"margin-top:20px;\">Days Attending</h3>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer radio\">\n        <div *ngFor=\"let day of attendeeForm.controls['days'].controls; let i=index\">\n          <div class=\"checkbox\">\n            <input class=\"icheckbox_flat\" id=\"flat-checkbox-2\" type=\"checkbox\" [formControl]=\"day\" (change)=\"addAttendee()\" />\n            <label>{{days_chosen[i].name}}</label>\n          </div>\n        </div>\n      </div>\n    </div>\n    \n    <hr>\n    <div class=\"FormFieldContainer\">\n      <ul class=\"pagination\">\n        <!-- <li class=\"active\"> -->\n        <!-- <a href=\"#\">PREV</a> -->\n        <!-- </li> -->\n        <li class=\"user-entry\" *ngFor=\"let person of people; let i = index\" [ngClass]=\"{'active': currentAttendee === person}\" (click)=\"loadAttendee(person, i);\">\n          <button type=\"button\" *ngIf=\"people.length > 1\" class=\"DeleteButton\" (click)=\"deleteAttendee(i)\">-</button>\n          <div class=\"pagination-button\">{{i+1}}</div>\n        </li>\n        <li>\n          <a id=\"add-entry-box\" (click)=\"createNewAttendee()\">\n            <i class=\"fa fa-plus fa-2x add-entry\"></i>\n          </a>\n        </li>\n        <!-- <li class=\"active\"> -->\n        <!-- <a href=\"#\">NEXT</a> -->\n        <!-- </li> -->\n      </ul>\n    </div>\n  </div>\n\n\n  <!-- <div style=\"height: 70px;\"></div> -->\n\n  <!-- <div class=\"title-container\">\n    <div class=\"title\"> -->\n  <!-- Church Contact -->\n  <!-- Church Contact\n    </div>\n  </div> -->\n\n  <!-- <div style=\"height: 40px;\"></div> -->\n\n  <!-- <div class=\"form-control\">\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church\">Your Church</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your Church Name\" name=\"your_church\" formControlName=\"your_church\" (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church_point_of_contact_name\">Your Church Point of Contact Name</label>\n        <input class=\"form-control\" type=\"text\" placeholder=\"Enter Your Church Point of Contact Name\" name=\"your_church_point_of_contact_name\" formControlName=\"your_church_point_of_contact_name\" (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n    <div class=\"FormRow\">\n      <div class=\"FormFieldContainer\">\n        <label class=\"control-label\" for=\"your_church_point_of_contact_number\">Your Church Point of Contact Number</label>\n        <input class=\"form-control\" type=\"number\" placeholder=\"Enter Your Church Point of Contact Phone Number\" name=\"your_church_point_of_contact_number\" formControlName=\"your_church_point_of_contact_number\" (change)=\"addAttendee()\" required>\n      </div>\n    </div>\n  </div> -->\n\n\n\n  <!-- <div class=\"title-container\">\n    <div class=\"title\">\n      Payment\n    </div>\n  </div> -->\n\n  <!-- <div class=\"page-border\">\n    <div class=\"form-control\">\n\n      <label for=\"card-info\" id=\"card-title\">Card Information</label>\n      <div class=\"CardRow\">\n        <div id=\"card-info\" #cardInfo></div>\n\n        <div id=\"card-errors\" role=\"alert\" *ngIf=\"error\">{{ error }}</div>\n      </div>\n    </div>\n  </div> -->\n</form>\n\n<!-- spacing -->\n<div style=\"height: 30px;\"></div>\n\n<!-- next button -->\n<div class=\"nav-buttons\">\n  <button class=\"nav-button next-button\" routerLink=\"/review\">Next</button>\n</div>"
 
 /***/ }),
 
@@ -260,7 +262,9 @@ var httpOptions = {
     })
 };
 var AttendeeFormComponent = /** @class */ (function () {
+    //attendeeForm.get('days').value
     function AttendeeFormComponent(fb, http, userService) {
+        this.fb = fb;
         this.http = http;
         this.userService = userService;
         this.first_name = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("", _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required);
@@ -287,6 +291,8 @@ var AttendeeFormComponent = /** @class */ (function () {
         this.your_church_point_of_contact_number = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]("");
         this.max_index = 0;
         this.current_index = 0;
+        this.cost = 0;
+        this.days_attending = "";
         this.people = [];
         this.sizes = ['S', 'M', 'L', 'XL', 'XXL'];
         this.genders = ['Male', 'Female'];
@@ -299,7 +305,16 @@ var AttendeeFormComponent = /** @class */ (function () {
             "PA - Philadelphia", "PA - Pittsburgh", "VA - Grace", "VA - Hyvong",
             "VA - Methodist Church", "FL - Orlando", "KY - Kentucky", "NC - North Carolina",
             "N/A"];
-        this.model = new _Models_Attendee__WEBPACK_IMPORTED_MODULE_1__["Attendee"]("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        this.days_chosen = [
+            { name: 'Friday', selected: true, id: 1 },
+            { name: 'Saturday', selected: true, id: 2 },
+            { name: 'Sunday', selected: true, id: 3 },
+            { name: 'Monday', selected: true, id: 4 }
+        ];
+        this.days_bool = [
+            true, true, true, true
+        ];
+        this.model = new _Models_Attendee__WEBPACK_IMPORTED_MODULE_1__["Attendee"]("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null);
         this.shouldSlice = true;
         this.attendeeForm = fb.group({
             "first_name": this.first_name,
@@ -323,10 +338,12 @@ var AttendeeFormComponent = /** @class */ (function () {
             "your_church": this.your_church,
             "your_church_point_of_contact_name": this.your_church_point_of_contact_name,
             "your_church_point_of_contact_number": this.your_church_point_of_contact_number,
+            days: this.fb.array(this.days_bool),
         });
     }
     AttendeeFormComponent.prototype.ngOnInit = function () {
         this.loadAttendees();
+        this.checkChurch();
     };
     //CRUD Options
     //Add attendee by creating a new attendee and navigating to it.
@@ -336,7 +353,7 @@ var AttendeeFormComponent = /** @class */ (function () {
         console.log("is form valid? ", this.attendeeForm.valid);
         this.checkChurch();
         if (this.attendeeForm.valid) {
-            var attendee = new _Models_Attendee__WEBPACK_IMPORTED_MODULE_1__["Attendee"]("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+            var attendee = new _Models_Attendee__WEBPACK_IMPORTED_MODULE_1__["Attendee"]("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null);
             attendee.first_name = this.first_name.value;
             attendee.last_name = this.last_name.value;
             attendee.t_shirt = this.t_shirt.value;
@@ -356,6 +373,9 @@ var AttendeeFormComponent = /** @class */ (function () {
             attendee.your_church = this.your_church.value;
             attendee.your_church_point_of_contact_name = this.your_church_point_of_contact_name.value;
             attendee.your_church_point_of_contact_number = this.your_church_point_of_contact_number.value;
+            this.numDaysCheck(); //updates days attending and cost before pushing change
+            attendee.days_attending = this.days_attending;
+            attendee.cost = this.cost;
             console.log("attendee", attendee);
             this.userService.addAttendee(this.current_index, attendee);
             this.currentAttendee = attendee;
@@ -367,10 +387,12 @@ var AttendeeFormComponent = /** @class */ (function () {
     };
     AttendeeFormComponent.prototype.createNewAttendee = function () {
         if (this.attendeeForm.valid) {
-            this.people.push(new _Models_Attendee__WEBPACK_IMPORTED_MODULE_1__["Attendee"]("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", ""));
+            this.people.push(new _Models_Attendee__WEBPACK_IMPORTED_MODULE_1__["Attendee"]("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "Friday, Saturday, Sunday, Monday", null));
             console.log(this.people);
             this.max_index++;
             this.current_index = this.max_index;
+            //Fills in checkboxes to attend everyday
+            this.attendeeForm.setControl('days', this.fb.array(this.days_bool));
             //copy church info to every other register. save work for leaders
             this.people[this.max_index].your_church = this.your_church.value;
             this.people[this.max_index].your_church_point_of_contact_name = this.your_church_point_of_contact_name.value;
@@ -382,10 +404,13 @@ var AttendeeFormComponent = /** @class */ (function () {
             //bind to UI
             this.bindListToForm();
             this.your_churches.setValue("Other");
+            //scroll to top of page
+            this.scroll();
         }
     };
     AttendeeFormComponent.prototype.loadAttendees = function () {
         var attendees = this.userService.getAllRegisters();
+        console.log(attendees);
         if (attendees.length > 0) {
             this.people = attendees;
             this.max_index = this.people.length - 1;
@@ -398,7 +423,7 @@ var AttendeeFormComponent = /** @class */ (function () {
             console.log("yes people", this.people);
         }
         else {
-            this.people.push(new _Models_Attendee__WEBPACK_IMPORTED_MODULE_1__["Attendee"]("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", ""));
+            this.people.push(new _Models_Attendee__WEBPACK_IMPORTED_MODULE_1__["Attendee"]("", "", "", "", null, "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", null));
             this.currentAttendee = this.people[0];
             this.max_index = 0;
             this.current_index = 0;
@@ -415,6 +440,7 @@ var AttendeeFormComponent = /** @class */ (function () {
         console.log("pulls in target attendee data into form");
         //Pull in target attendee data and put into form
         this.bindListToForm();
+        this.rebindDaysCheck();
         //Updates current index to the attendee we're loading
         this.current_index = new_index;
         //make sure the last index should not be deleted
@@ -438,13 +464,73 @@ var AttendeeFormComponent = /** @class */ (function () {
     };
     //Checks if Other or N/A church is selected
     AttendeeFormComponent.prototype.checkChurch = function () {
-        console.log(this.your_churches);
         if (this.your_churches.value == 'N/A') {
             this.your_church.setValue("");
         }
         else if (!(this.your_churches.value == 'Other')) {
             this.your_church.setValue(this.your_churches.value);
         }
+        //Makes sure the list is always set to what's in the Church Name box
+        //If not, then is set to Other
+        if (this.church_list.includes(this.your_church.value, 0)) {
+            this.your_churches.setValue(this.your_church.value);
+            console.log(this.your_churches.value);
+            console.log(this.your_church.value);
+        }
+        if (this.your_churches.value == "" || this.your_churches.value == null) {
+            this.your_churches.setValue("Other");
+        }
+    };
+    AttendeeFormComponent.prototype.numDaysCheck = function () {
+        var dates = this.attendeeForm.get('days').value;
+        this.cost = 0;
+        this.days_attending = "";
+        if (dates[0]) {
+            this.cost += 25; //Price for attending Friday
+            this.days_attending += "Friday, ";
+        }
+        if (dates[1]) {
+            this.cost += 52.5; //Price for attending Saturday
+            this.days_attending += "Saturday, ";
+        }
+        if (dates[2]) {
+            this.cost += 52.5; //Price for attending Sunday
+            this.days_attending += "Sunday, ";
+        }
+        if (dates[3]) {
+            this.cost += 25; //Price for attending Monday
+            this.days_attending += "Monday";
+        }
+        console.log(this.cost);
+        console.log(this.days_attending);
+        console.log("being called in numdayscheck");
+    };
+    AttendeeFormComponent.prototype.rebindDaysCheck = function () {
+        console.log(this.currentAttendee.days_attending.includes("Friday"));
+        console.log(this.currentAttendee.days_attending.includes("Saturday"));
+        console.log(this.currentAttendee.days_attending.includes("Sunday"));
+        console.log(this.currentAttendee.days_attending.includes("Monday"));
+        this.attendeeForm.setControl('days', this.fb.array([
+            this.currentAttendee.days_attending.includes("Friday"),
+            this.currentAttendee.days_attending.includes("Saturday"),
+            this.currentAttendee.days_attending.includes("Sunday"),
+            this.currentAttendee.days_attending.includes("Monday")
+        ]));
+        // this.attendeeForm.setControl('days', this.fb.array(this.days_bool));
+    };
+    //Scrolls to top of page when adding new attendee
+    AttendeeFormComponent.prototype.scroll = function () {
+        console.log("Scrolling to the top");
+        var scrollToTop = window.setInterval(function () {
+            var pos = window.pageYOffset;
+            if (pos > 0) {
+                window.scrollTo(0, pos - 40); // how far to scroll on each step
+            }
+            else {
+                window.clearInterval(scrollToTop);
+            }
+        }, 16);
+        console.log("Done scrolling to the top");
     };
     //Binding
     //Updates the list's values with the contents of the form
@@ -465,6 +551,8 @@ var AttendeeFormComponent = /** @class */ (function () {
         this.people[index].emergency_contact_last_name = this.emergency_contact_last_name.value;
         this.people[index].emergency_contact_phone_number = this.emergency_contact_phone_number.value;
         this.people[index].emergency_contact_relationship = this.emergency_contact_relationship.value;
+        this.people[index].days_attending = this.days_attending;
+        this.people[index].cost = this.cost;
     };
     //Updates the form's values with the contents from the list
     AttendeeFormComponent.prototype.bindListToForm = function () {
@@ -488,6 +576,7 @@ var AttendeeFormComponent = /** @class */ (function () {
         this.your_church.setValue(this.currentAttendee.your_church);
         this.your_church_point_of_contact_name.setValue(this.currentAttendee.your_church_point_of_contact_name);
         this.your_church_point_of_contact_number.setValue(this.currentAttendee.your_church_point_of_contact_number);
+        this.rebindDaysCheck();
     };
     //updates malleable model to target attendee info
     AttendeeFormComponent.prototype.bindToTarget = function (attendee) {
@@ -629,7 +718,7 @@ var InfoFormComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- spacing -->\n<div style=\"height: 30px;\"></div>\n\n<!-- Previous Button -->\n<div class=\"nav-buttons\" style=\"text-align: left;\">\n  <button class=\"nav-button edit-button\" routerLink=\"/form\">Edit</button>\n</div>\n\n<div class=\"total-info\">\n  Total Registers:\n  <span *ngIf=\"registers.length != undefined\">{{registers.length}}</span>\n  <span *ngIf=\"registers.length == undefined\">0</span>\n</div>\n\n<form #checkout=\"ngForm\" (ngSubmit)=\"onSubmit(checkout)\">\n  <div class=\"checkout\">\n<!-- spacing -->\n<div style=\"height: 25px;\"></div>\n\n  <table>\n    <tr>\n      <th class=\"col-md-6\">Name</th>\n      <th class=\"col-md-4\">Age</th>\n      <th class=\"col-md-4\">Gender</th>\n      <th class=\"col-md-4\">Shirt Size</th>\n    </tr>\n    <tr *ngFor=\"let attendee of registers\">\n      <td class=\"col-md-6\">{{attendee.first_name}} {{attendee.last_name}}</td>\n      <td class=\"col-md-4\">{{attendee.age}}</td>\n      <td class=\"col-md-4\">{{attendee.gender}}</td>\n      <td class=\"col-md-4\">{{attendee.t_shirt}}</td>\n    </tr>\n  </table>\n\n  <!-- spacing -->\n  <div style=\"height: 70px;\"></div>\n\n\n  <div>\n\n    <label for=\"card-info\" id=\"card-title\">Card Information</label>\n    <div class=\"CardRow\">\n      <div id=\"card-info\" #cardInfo></div>\n\n      <div id=\"card-errors\" role=\"alert\" *ngIf=\"error\">{{ error }}</div>\n    </div>\n\n    <label class=\"email-info\">Email For Receipt</label>\n    <div class='CardRow row'>\n      <div class=\"EmailGroup\">\n          <input #email (keyup)=\"onKey(email.value)\" id=\"email\" name=\"email\" class=\"field\" placeholder=\"jane.doe@example.com\" ngModel email required/>\n      </div>\n    </div>\n  </div>\n\n  <!-- spacing -->\n  <div style=\"height: 70px;\"></div>\n</div>\n\n\n  <button class=\"primary-button pay-button\" type=\"submit\">Pay ${{registers.length * 155}}</button>\n\n  <!-- spacing -->\n  <div style=\"height: 200px;\"></div>\n\n</form>\n\n<!-- <button class=\"primary-button\" (click)=\"postToGoogle()\">Post to Google Form</button> -->\n<p *ngIf=\"loading === true\">Loading...</p>"
+module.exports = "<!-- spacing -->\n<div style=\"height: 30px;\"></div>\n\n<!-- Previous Button -->\n<div class=\"nav-buttons\" style=\"text-align: left;\">\n  <button class=\"nav-button edit-button\" routerLink=\"/form\">Edit</button>\n</div>\n\n<div class=\"total-info\">\n  Total Registers:\n  <span *ngIf=\"registers.length != undefined\">{{registers.length}}</span>\n  <span *ngIf=\"registers.length == undefined\">0</span>\n</div>\n\n<form #checkout=\"ngForm\" (ngSubmit)=\"onSubmit(checkout)\">\n  <div class=\"checkout\">\n<!-- spacing -->\n<div style=\"height: 25px;\"></div>\n\n  <table>\n    <tr>\n      <th class=\"col-md-6\">Name</th>\n      <th class=\"col-md-6\">Days Attending</th>\n      <th class=\"col-md-4\">Cost</th>\n      <th class=\"col-md-4\">Age</th>\n      <th class=\"col-md-4\">Gender</th>\n      <th class=\"col-md-4\">Shirt Size</th>\n    </tr>\n    <tr *ngFor=\"let attendee of registers\">\n      <td class=\"col-md-6\">{{attendee.first_name}} {{attendee.last_name}}</td>\n      <td class=\"col-md-6\">{{attendee.days_attending}}</td>\n      <td class=\"col-md-4\">{{attendee.cost | currency }}</td>\n      <td class=\"col-md-4\">{{attendee.age}}</td>\n      <td class=\"col-md-4\">{{attendee.gender}}</td>\n      <td class=\"col-md-4\">{{attendee.t_shirt}}</td>\n    </tr>\n  </table>\n\n  <!-- spacing -->\n  <div style=\"height: 70px;\"></div>\n\n\n  <div>\n\n    <label for=\"card-info\" id=\"card-title\">Card Information</label>\n    <div class=\"CardRow\">\n      <div id=\"card-info\" #cardInfo></div>\n\n      <div id=\"card-errors\" role=\"alert\" *ngIf=\"error\">{{ error }}</div>\n    </div>\n\n    <label class=\"email-info\">Email For Receipt</label>\n    <div class='CardRow row'>\n      <div class=\"EmailGroup\">\n          <input #email (keyup)=\"onKey(email.value)\" id=\"email\" name=\"email\" class=\"field\" placeholder=\"jane.doe@example.com\" ngModel email required/>\n      </div>\n    </div>\n  </div>\n\n  <!-- spacing -->\n  <div style=\"height: 70px;\"></div>\n</div>\n\n\n  <button class=\"primary-button pay-button\" type=\"submit\">Pay {{total_cost | currency}}</button>\n\n  <!-- spacing -->\n  <div style=\"height: 200px;\"></div>\n\n</form>\n\n<!-- <button class=\"primary-button\" (click)=\"postToGoogle()\">Post to Google Form</button> -->\n<p *ngIf=\"loading === true\">Loading...</p>"
 
 /***/ }),
 
@@ -719,6 +808,7 @@ var ReviewPageComponent = /** @class */ (function () {
         this.cardHandler = this.onChange.bind(this);
         this.loading = false;
         this.email = '';
+        this.total_cost = 0;
     }
     ReviewPageComponent.prototype.ngOnInit = function () {
         //get data from form registrations
@@ -726,6 +816,14 @@ var ReviewPageComponent = /** @class */ (function () {
         console.log("Registers: ", this.registers);
         //scrolls to top of screen
         window.scrollTo(0, 0);
+        //Calculates total for registers
+        for (var i = 0; i < this.registers.length; i++) {
+            console.log("Old total is: " + this.total_cost);
+            console.log("Adding " + this.registers[i].cost);
+            this.total_cost += this.registers[i].cost;
+            console.log("New total is: " + this.total_cost);
+        }
+        console.log(this.total_cost);
     };
     ReviewPageComponent.prototype.ngAfterViewInit = function () {
         var style = {
@@ -775,6 +873,7 @@ var ReviewPageComponent = /** @class */ (function () {
                             this.processCharge(token).then(function (success) { return _this.postToGoogle(); }, function (error) { return console.error("Stripe process charge error", error); });
                             this.router.navigate(['/', 'thank-you']);
                         }
+                        this.postToGoogle();
                         return [2 /*return*/];
                 }
             });
@@ -786,7 +885,7 @@ var ReviewPageComponent = /** @class */ (function () {
         // var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/stripe-payment';
         var promise = new Promise(function (resolve, reject) {
             var command = {
-                amount: 15500 * _this.registers.length,
+                amount: _this.total_cost * 100,
                 currency: 'usd',
                 description: 'Registration cost for ' + _this.email,
                 source: token,
@@ -876,14 +975,15 @@ var GoogleService = /** @class */ (function () {
                     ("&entry.1300146252=" + registers[i].state) +
                     ("&entry.1995735036=" + registers[i].zip_code) +
                     ("&entry.1163380930=" + registers[i].email) +
-                    ("&entry.1814348022=" + registers[i].emergency_contact_first_name) +
-                    ("&entry.1795731922=" + registers[i].emergency_contact_last_name) +
-                    ("&entry.42598533=" + registers[i].emergency_contact_phone_number) +
-                    ("&entry.1822987082=" + registers[i].emergency_contact_relationship) +
-                    ("&entry.854313620=" + registers[i].your_church) +
-                    ("&entry.1752027412=" + registers[i].your_church_point_of_contact_name) +
-                    ("&entry.516070659=" + registers[i].your_church_point_of_contact_number) +
-                    "&entry.345154263=155" +
+                    ("&entry.1814348022=" + registers[i].your_church) +
+                    ("&entry.1795731922=" + registers[i].your_church_point_of_contact_name) +
+                    ("&entry.42598533=" + registers[i].your_church_point_of_contact_number) +
+                    ("&entry.1822987082=" + registers[i].emergency_contact_first_name) +
+                    ("&entry.854313620=" + registers[i].emergency_contact_last_name) +
+                    ("&entry.1752027412=" + registers[i].emergency_contact_phone_number) +
+                    ("&entry.516070659=" + registers[i].emergency_contact_relationship) +
+                    ("&entry.1868024724=" + registers[i].days_attending) +
+                    ("&entry.345154263=" + registers[i].cost) +
                     "&entry.1114223182=Yes";
                 _this.http.post(_this.url, body, {
                     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('Content-Type', 'application/x-www-form-urlencoded')
@@ -1004,6 +1104,8 @@ var ThankyoupageComponent = /** @class */ (function () {
     function ThankyoupageComponent() {
     }
     ThankyoupageComponent.prototype.ngOnInit = function () {
+        //scrolls to top of screen
+        window.scrollTo(0, 0);
     };
     ThankyoupageComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
