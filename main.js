@@ -718,7 +718,7 @@ var Attendee = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- spacing -->\r\n<div style=\"height: 30px;\"></div>\r\n\r\n<!-- Previous Button -->\r\n<div class=\"nav-buttons\" style=\"text-align: left;\">\r\n  <button class=\"nav-button edit-button\" routerLink=\"/form\">Edit</button>\r\n</div>\r\n\r\n<div class=\"total-info\">\r\n  Total Registers:\r\n  <span *ngIf=\"registers.length != undefined\">{{registers.length}}</span>\r\n  <span *ngIf=\"registers.length == undefined\">0</span>\r\n</div>\r\n\r\n<form #checkout=\"ngForm\" (ngSubmit)=\"onSubmit(checkout)\">\r\n  <div class=\"checkout\">\r\n<!-- spacing -->\r\n<div style=\"height: 25px;\"></div>\r\n\r\n<table class=\"Tablecontainer\">\r\n    <tr class=\"Tablerow\">\r\n      <th class=\"col-md-4\">Name</th>\r\n      <th class=\"col-md-2\">Age</th>\r\n      <th class=\"col-md-4\">Days Attending</th>\r\n      <th class=\"col-md-2\">Cost</th>\r\n    </tr>\r\n    <tr *ngFor=\"let attendee of registers\" class=\"Tablerow\">\r\n      <td class=\"col-md-4\">{{attendee.first_name}} {{attendee.last_name}} <br>Gender: {{attendee.gender}} <br>Shirt Size: {{attendee.t_shirt}}</td>\r\n      <td class=\"col-md-2\">{{attendee.age}}</td>\r\n      <td class=\"col-md-4\">{{attendee.days_attending}}</td>\r\n      <td class=\"col-md-2\">{{attendee.cost | currency }}</td>\r\n  </table>\r\n  <!-- spacing -->\r\n  <div style=\"height: 70px;\"></div>\r\n\r\n\r\n    <label for=\"card-info\" id=\"card-title\">Card Information</label>\r\n    <div class=\"CardRow\">\r\n      <div id=\"card-info\" #cardInfo></div>\r\n\r\n      <div id=\"card-errors\" role=\"alert\" *ngIf=\"error\">{{ error }}</div>\r\n    </div>\r\n\r\n    <label class=\"email-info\">Email For Receipt</label>\r\n    <div class='CardRow row'>\r\n      <div class=\"EmailGroup\">\r\n          <input #email (keyup)=\"onKey(email.value)\" id=\"email\" name=\"email\" class=\"field\" placeholder=\"jane.doe@example.com\" ngModel email required/>\r\n      </div>\r\n    </div>\r\n\r\n\r\n\r\n  <!-- spacing -->\r\n  <div style=\"height: 70px;\"></div>\r\n</div>\r\n\r\n\r\n  <button [disabled]='isDisabled()' class=\"primary-button pay-button\" type=\"submit\">Pay {{total_cost | currency}}</button>\r\n\r\n  <!-- spacing -->\r\n  <div style=\"height: 200px;\"></div>\r\n\r\n</form>\r\n\r\n<!-- <button class=\"primary-button\" (click)=\"postToGoogle()\">Post to Google Form</button> -->\r\n<p *ngIf=\"loading === true\">Loading...</p>"
+module.exports = "<!-- spacing -->\r\n<div style=\"height: 30px;\"></div>\r\n\r\n<!-- Previous Button -->\r\n<div class=\"nav-buttons\" style=\"text-align: left;\">\r\n  <button class=\"nav-button edit-button\" routerLink=\"/form\">Edit</button>\r\n</div>\r\n\r\n<div class=\"total-info\">\r\n  Total Registers:\r\n  <span *ngIf=\"registers.length != undefined\">{{registers.length}}</span>\r\n  <span *ngIf=\"registers.length == undefined\">0</span>\r\n</div>\r\n\r\n<form #checkout=\"ngForm\" (ngSubmit)=\"onSubmit(checkout)\">\r\n  <div class=\"checkout\">\r\n    <!-- spacing -->\r\n    <div style=\"height: 25px;\"></div>\r\n\r\n    <table class=\"Tablecontainer\">\r\n      <tr class=\"Tablerow\">\r\n        <th class=\"col-md-4\">Name</th>\r\n        <th class=\"col-md-2\">Age</th>\r\n        <th class=\"col-md-4\">Days Attending</th>\r\n        <th class=\"col-md-2\">Cost</th>\r\n      </tr>\r\n      <tr *ngFor=\"let attendee of registers\" class=\"Tablerow\">\r\n        <td class=\"col-md-4\">{{attendee.first_name}} {{attendee.last_name}}\r\n          <br>Gender: {{attendee.gender}}\r\n          <br>Shirt Size: {{attendee.t_shirt}}</td>\r\n        <td class=\"col-md-2\">{{attendee.age}}</td>\r\n        <td class=\"col-md-4\">{{attendee.days_attending}}</td>\r\n        <td class=\"col-md-2\">{{attendee.cost | currency }}</td>\r\n    </table>\r\n   \r\n      <div class=\"FormFieldContainer\">\r\n        <label class=\"discount-label\">Discount Code</label>\r\n        <input #discount class=\"discount\" id=\"discount\" type=\"text\" placeholder=\"Enter Promo Code\" name=\"discount\" (keyup)=\"checkDiscount(discount.value)\">\r\n       </div>    \r\n      <div class=\"cost-info\">Sub-Total: ${{original_cost}}</div>\r\n      <div class=\"cost-info\">Discount: - ${{cost_diff}}</div>\r\n      <div class=\"cost-info\">Total: ${{total_cost}}</div>\r\n  </div>\r\n\r\n      <!-- spacing  -->\r\n      <div style=\"height: 30px;\"></div>\r\n  <div class=\"payment-title\">Payment</div>\r\n\r\n\r\n  <div class=\"checkout\">\r\n    <div style=\"height: 20px;\"></div>\r\n    <label for=\"card-info\" id=\"card-title\">Card Information</label>\r\n    <div class=\"CardRow\">\r\n      <div id=\"card-info\" #cardInfo></div>\r\n\r\n      <div id=\"card-errors\" role=\"alert\" *ngIf=\"error\">{{ error }}</div>\r\n    </div>\r\n\r\n    <label class=\"email-info\">Email For Receipt</label>\r\n    <div class='CardRow row'>\r\n      <div class=\"EmailGroup\">\r\n        <input #email (keyup)=\"onKey(email.value)\" id=\"email\" name=\"email\" class=\"field\" placeholder=\"jane.doe@example.com\" ngModel\r\n          email required/>\r\n      </div>\r\n    </div>\r\n    <div style=\"height: 30px;\"></div>\r\n  </div>\r\n\r\n  <button [disabled]='isDisabled()' class=\"primary-button pay-button\" type=\"submit\">Pay {{total_cost | currency}}</button>\r\n\r\n  <!-- spacing -->\r\n  <div style=\"height: 200px;\"></div>\r\n\r\n</form>\r\n\r\n<!-- <button class=\"primary-button\" (click)=\"postToGoogle()\">Post to Google Form</button> -->\r\n<p *ngIf=\"loading === true\">Loading...</p>"
 
 /***/ }),
 
@@ -809,6 +809,8 @@ var ReviewPageComponent = /** @class */ (function () {
         this.loading = false;
         this.email = '';
         this.total_cost = 0;
+        this.original_cost = 0;
+        this.cost_diff = 0;
         this.button_disabled = false;
     }
     ReviewPageComponent.prototype.ngOnInit = function () {
@@ -819,6 +821,7 @@ var ReviewPageComponent = /** @class */ (function () {
         window.scrollTo(0, 0);
         //Calculates total for registers
         this.total_cost = this.registers.length * 155;
+        this.original_cost = this.registers.length * 155;
         // for(var i = 0; i<this.registers.length; i++){
         //   console.log("Old total is: " + this.total_cost);
         //   console.log("Adding " + this.registers[i].cost);
@@ -913,6 +916,21 @@ var ReviewPageComponent = /** @class */ (function () {
     };
     ReviewPageComponent.prototype.isDisabled = function () {
         return this.button_disabled;
+    };
+    ReviewPageComponent.prototype.checkDiscount = function (discount) {
+        var _this = this;
+        var task_url = 'https://wt-0abace7df40ea939072b329aa74c0316-0.sandbox.auth0-extend.com/handle-discount';
+        var promise = new Promise(function (resolve, reject) {
+            var command = {
+                code: discount
+            };
+            _this.http.post(task_url, command).subscribe(function (data) {
+                _this.dataObj = data;
+                _this.total_cost = _this.dataObj.newCost * _this.registers.length;
+                _this.original_cost = 155 * _this.registers.length;
+                _this.cost_diff = _this.original_cost - _this.total_cost;
+            }, function (error) { return reject(error); });
+        });
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('cardInfo'),
