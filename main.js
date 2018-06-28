@@ -131,7 +131,7 @@ var appRoutes = [
     { path: 'review', component: _review_page_review_page_component__WEBPACK_IMPORTED_MODULE_8__["ReviewPageComponent"] },
     { path: 'thank-you', component: _thankyoupage_thankyoupage_component__WEBPACK_IMPORTED_MODULE_9__["ThankyoupageComponent"] },
     { path: '', redirectTo: '/form', pathMatch: 'full' },
-    { path: '**', component: _attendee_form_attendee_form_component__WEBPACK_IMPORTED_MODULE_5__["AttendeeFormComponent"] }
+    { path: '**', redirectTo: '/src/404.html' }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
