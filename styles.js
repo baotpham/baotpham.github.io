@@ -621,9 +621,9 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\John Ha\Documents\CVCF\CustomRegistrationForm\src\styles.scss */"./src/styles.scss");
-__webpack_require__(/*! C:\Users\John Ha\Documents\CVCF\CustomRegistrationForm\node_modules\bootstrap\dist\css\bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
-module.exports = __webpack_require__(/*! C:\Users\John Ha\Documents\CVCF\CustomRegistrationForm\node_modules\font-awesome\css\font-awesome.css */"./node_modules/font-awesome/css/font-awesome.css");
+__webpack_require__(/*! C:\Users\jha\Documents\CVCF\CustomRegistrationForm\src\styles.scss */"./src/styles.scss");
+__webpack_require__(/*! C:\Users\jha\Documents\CVCF\CustomRegistrationForm\node_modules\bootstrap\dist\css\bootstrap.css */"./node_modules/bootstrap/dist/css/bootstrap.css");
+module.exports = __webpack_require__(/*! C:\Users\jha\Documents\CVCF\CustomRegistrationForm\node_modules\font-awesome\css\font-awesome.css */"./node_modules/font-awesome/css/font-awesome.css");
 
 
 /***/ })
