@@ -809,8 +809,9 @@ var ReviewPageComponent = /** @class */ (function () {
         this.loading = false;
         this.email = '';
         this.total_cost = 0;
+        this.base_price = 165;
         this.original_cost = 0;
-        this.new_cost = 155;
+        this.new_cost = 165;
         this.cost_diff = 0;
         this.button_disabled = false;
     }
@@ -821,8 +822,8 @@ var ReviewPageComponent = /** @class */ (function () {
         //scrolls to top of screen
         window.scrollTo(0, 0);
         //Calculates total for registers
-        this.total_cost = this.registers.length * 155;
-        this.original_cost = this.registers.length * 155;
+        this.total_cost = this.registers.length * this.base_price;
+        this.original_cost = this.registers.length * this.base_price;
         // for(var i = 0; i<this.registers.length; i++){
         //   console.log("Old total is: " + this.total_cost);
         //   console.log("Adding " + this.registers[i].cost);
@@ -942,7 +943,7 @@ var ReviewPageComponent = /** @class */ (function () {
                 _this.dataObj = data;
                 _this.new_cost = _this.dataObj.newCost;
                 _this.total_cost = _this.dataObj.newCost * _this.registers.length;
-                _this.original_cost = 165 * _this.registers.length;
+                _this.original_cost = _this.base_price * _this.registers.length;
                 _this.cost_diff = _this.original_cost - _this.total_cost;
             }, function (error) { return reject(error); });
         });
