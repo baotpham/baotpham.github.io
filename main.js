@@ -443,7 +443,7 @@ var AttendeeFormComponent = /** @class */ (function () {
     AttendeeFormComponent.prototype.numDaysCheck = function () {
         var dates = this.attendeeForm.get('days').value;
         // this.cost = 0;
-        this.cost = 155;
+        this.cost = 165;
         this.days_attending = "";
         if (dates[0]) {
             // this.cost += 25; //Price for attending Friday
