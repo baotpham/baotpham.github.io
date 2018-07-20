@@ -443,7 +443,7 @@ var AttendeeFormComponent = /** @class */ (function () {
     AttendeeFormComponent.prototype.numDaysCheck = function () {
         var dates = this.attendeeForm.get('days').value;
         // this.cost = 0;
-        this.cost = 165;
+        this.cost = 155;
         this.days_attending = "";
         if (dates[0]) {
             // this.cost += 25; //Price for attending Friday
@@ -809,9 +809,9 @@ var ReviewPageComponent = /** @class */ (function () {
         this.loading = false;
         this.email = '';
         this.total_cost = 0;
-        this.base_price = 165;
+        this.base_price = 155;
         this.original_cost = 0;
-        this.new_cost = 165;
+        this.new_cost = 155;
         this.cost_diff = 0;
         this.button_disabled = false;
     }
