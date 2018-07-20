@@ -942,7 +942,7 @@ var ReviewPageComponent = /** @class */ (function () {
                 _this.dataObj = data;
                 _this.new_cost = _this.dataObj.newCost;
                 _this.total_cost = _this.dataObj.newCost * _this.registers.length;
-                _this.original_cost = 155 * _this.registers.length;
+                _this.original_cost = 165 * _this.registers.length;
                 _this.cost_diff = _this.original_cost - _this.total_cost;
             }, function (error) { return reject(error); });
         });
